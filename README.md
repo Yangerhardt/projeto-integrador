@@ -14,9 +14,7 @@
 - Apache Maven
 
 ## Time de Desenvolvedores
-- Nome do Desenvolvedor 1
-- Nome do Desenvolvedor 2
-- Nome do Desenvolvedor 3
+- Yan Krug Gerhardt
 
 ## Objetivo do Software
 O **WorkIn** é um sistema de gerenciamento de academia que tem como objetivo principal auxiliar os usuários a acompanhar e gerenciar seus treinos, metas e progressos. O sistema permite que os usuários cadastrem seus dados pessoais, criem metas de treino, registrem seus treinos e acompanhem o progresso ao longo do tempo.
