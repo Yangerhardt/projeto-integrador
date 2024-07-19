@@ -21,6 +21,7 @@ public class UserService {
     }
 
     public User saveUser(User user) {
+        System.out.println("User: " + user.getEmail());
         return userRepository.save(user);
     }
 
