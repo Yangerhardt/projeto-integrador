@@ -11,11 +11,22 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String nome;
+
+    @Column(nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false)
     private String senha;
+
+    @Column(name = "data_nascimento", nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date dataNascimento;
-    private Date dataCriacao;
+
+    @Column(name = "data_criacao", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataCriacao = new Date();
 
     public Long getId() {
         return id;
