@@ -1,25 +1,32 @@
-$(document).ready(function() {
-    $("#register-form").on("submit", function(event) {
-        event.preventDefault();
+document.getElementById('register-form').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-        const formData = {
-            nome: $("#nome").val(),
-            dataNascimento: $("#dataNascimento").val(),
-            email: $("#email").val(),
-            password: $("#senha").val()
-        };
+    const nome = document.getElementById('nome').value;
+    const email = document.getElementById('email').value;
+    const senha = document.getElementById('senha').value;
+    const dataNascimento = document.getElementById('dataNascimento').value;
 
-        $.ajax({
-            type: "POST",
-            url: "/cadastro",
-            data: JSON.stringify(formData),
-            contentType: "application/json",
-            success: function(response) {
-                window.location.href = "/login";
-            },
-            error: function(error) {
-                console.error("Erro ao cadastrar usuário", error);
-            }
-        });
+    const user = {
+        nome: nome,
+        email: email,
+        senha: senha,
+        dataNascimento: dataNascimento
+    };
+
+    fetch('/api/users', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('Usuário cadastrado com sucesso!');
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        alert('Erro ao cadastrar usuário.');
+        console.error('Error:', error);
     });
 });

@@ -1,8 +1,8 @@
 package com.example.workit.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.Date;
 
@@ -19,16 +19,21 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
+    @Column()
     private String senha;
 
     @Column(name = "data_nascimento", nullable = false)
     @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dataNascimento;
 
     @Column(name = "data_criacao", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataCriacao = new Date();
+
+    public User() {
+    }
+
 
     public Long getId() {
         return id;

@@ -5,6 +5,7 @@ import com.example.workit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,14 +24,11 @@ public class WebController {
     }
     @GetMapping("/cadastro")
     public String showRegisterPage(Model model) {
-        model.addAttribute("user", new User());
         return "cadastro";
     }
 
     @PostMapping("/cadastro")
-    public String registerUser(@ModelAttribute("user") User user) {
-        System.out.println("User: " + user);
-
+    public String registerUser(@ModelAttribute("user") User user, BindingResult result, Model model) {
         userService.saveUser(user);
         return "redirect:/login";
     }
