@@ -11,10 +11,8 @@ public class Workout {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnore
-    private User user;
+    private Long userId;
 
     private String tipoTreino;
 
@@ -22,6 +20,14 @@ public class Workout {
 
     @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<WorkoutExercise> exercises;
+
+    public Workout() {}
+
+    public Workout(Long userId, String tipoTreino, String diasSemana) {
+        this.userId = userId;
+        this.tipoTreino = tipoTreino;
+        this.diasSemana = diasSemana;
+    }
 
     public Long getId() {
         return id;
@@ -31,12 +37,12 @@ public class Workout {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getTipoTreino() {

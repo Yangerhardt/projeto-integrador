@@ -24,7 +24,14 @@ public class WorkoutExercise {
     @Column(name = "carga")
     private Integer carga;
 
-    // Getters and setters
+    public WorkoutExercise(Long treinoId, String nomeExercicio, String series, Integer carga) {
+        this.workout = new Workout();
+        this.workout.setId(treinoId);
+        this.nomeExercicio = nomeExercicio;
+        this.series = series;
+        this.carga = carga;
+    }
+
     public Long getId() {
         return id;
     }
