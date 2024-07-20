@@ -26,6 +26,14 @@ public class WebController {
     public String home() {
         return "home";
     }
+    @GetMapping("/frequencia")
+    public String frequencia() {
+        return "frequencia";
+    }
+    @GetMapping("/treino")
+    public String treino() {
+        return "treino";
+    }
     @GetMapping("/cadastro")
     public String showRegisterPage(Model model) {
         return "cadastro";

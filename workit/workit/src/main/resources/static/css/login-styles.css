@@ -17,6 +17,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 
@@ -78,9 +79,9 @@ button:hover {
     text-decoration: underline;
 }
 
-.theme-toggle {
+#back-button{
     position: absolute;
-    top: 20px;
+    top: -20px;
     right: 20px;
 }
 
@@ -89,3 +90,23 @@ button:hover {
     height: 24px;
     cursor: pointer;
 }
+
+.frequency-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.frequency-checkbox input {
+    width: 24px;
+    height: 24px;
+    outline: none;
+}
+
+.frequency-checkbox label {
+    display: block;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+
