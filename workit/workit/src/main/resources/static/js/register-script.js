@@ -24,6 +24,7 @@ document.getElementById('register-form').addEventListener('submit', function(eve
     .then(data => {
         alert('Usuário cadastrado com sucesso!');
         console.log('Success:', data);
+        window.location.href = '/login'
     })
     .catch((error) => {
         alert('Erro ao cadastrar usuário.');
