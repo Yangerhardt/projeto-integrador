@@ -1,41 +1,62 @@
 $(document).ready(function() {
-    // Função para buscar dados do treino
-    function fetchTrainingData(day) {
-        // Simulação de uma chamada ao banco de dados para obter os dados do treino
-        let trainingData = {
-            "segunda": [
-                { exercicio: "Supino Reto", series: "4 x 12", carga: 20 },
-                { exercicio: "Supino Inclinado", series: "4 x 12", carga: 15 },
-                { exercicio: "Crucifixo", series: "4 x 12", carga: 10 },
-                { exercicio: "Tríceps Francês", series: "4 x 12", carga: 8 },
-                { exercicio: "Tríceps Barra H", series: "4 x 12", carga: 10 },
-                { exercicio: "Tríceps Barra Reta", series: "4 x 12", carga: 30 }
-            ],
-            // Adicione outros dias da semana conforme necessário
-        };
-
-        return trainingData[day] || [];
+    function getCookie(name) {
+        let cookieArr = document.cookie.split(";");
+        for (let i = 0; i < cookieArr.length; i++) {
+            let cookiePair = cookieArr[i].split("=");
+            if (name == cookiePair[0].trim()) {
+                return decodeURIComponent(cookiePair[1]);
+            }
+        }
+        return null;
     }
 
-    // Função para renderizar dados do treino na tabela
-    function renderTrainingData(day) {
-        let trainingData = fetchTrainingData(day);
-        let tbody = $("#training-table tbody");
-        tbody.empty();
-
-        trainingData.forEach(function(item) {
-            let row = `<tr>
-                <td>${item.exercicio}</td>
-                <td>${item.series}</td>
-                <td>${item.carga}</td>
-            </tr>`;
-            tbody.append(row);
+    function fetchTrainingData(userId, day) {
+        return $.ajax({
+            url: `/api/workouts/${userId}/${day}`,
+            method: "GET",
+            dataType: "json"
         });
     }
 
-    // Carrega dados do treino ao clicar em um botão de dia da semana
+    function renderTrainingData(trainingData) {
+        let tbody = $("#training-table tbody");
+        let title = $("training-name");
+        tbody.empty();
+
+        if (trainingData.length > 0) {
+            let tipoTreino = trainingData[0].tipoTreino;
+            title.text(`Treino: ${tipoTreino}`);
+
+            trainingData.forEach(function(dayData) {
+                dayData.exercises.forEach(function(exercise) {
+                    let row = `<tr>
+                        <td>${exercise.nomeExercicio}</td>
+                        <td>${exercise.series}</td>
+                        <td>${exercise.carga}</td>
+                    </tr>`;
+                    tbody.append(row);
+                });
+            });
+        } else {
+            title.text("Treino");
+            tbody.append("<tr><td colspan='3'>Nenhum exercício encontrado.</td></tr>");
+        }
+    }
+
     $(".weekday-btn").on("click", function() {
         let day = $(this).attr("id");
-        renderTrainingData(day);
+        let userId = getCookie("userId");
+
+        if (userId) {
+            fetchTrainingData(userId, day)
+                .done(function(data) {
+                    renderTrainingData(data);
+                })
+                .fail(function(jqXHR, textStatus, errorThrown) {
+                    console.error("Error fetching training data:", textStatus, errorThrown);
+                });
+        } else {
+            console.error("User ID cookie not found.");
+        }
     });
 });

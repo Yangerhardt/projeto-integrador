@@ -25,7 +25,7 @@ public class AuthController {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             if (user.getSenha().equals(loginRequest.getPassword())) {
-                return ResponseEntity.ok("Login successful");
+                return ResponseEntity.ok(user.getId().toString());
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
             }

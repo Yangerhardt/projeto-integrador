@@ -1,7 +1,8 @@
 package com.example.workit.model;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "workouts")
@@ -11,10 +12,16 @@ public class Workout {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 
-    private String descricao;
+    private String tipoTreino;
+
+    private String diasSemana;
+
+    @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<WorkoutExercise> exercises;
 
     public Long getId() {
         return id;
@@ -32,11 +39,27 @@ public class Workout {
         this.user = user;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getTipoTreino() {
+        return tipoTreino;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setTipoTreino(String tipoTreino) {
+        this.tipoTreino = tipoTreino;
+    }
+
+    public String getDiasSemana() {
+        return diasSemana;
+    }
+
+    public void setDiasSemana(String diasSemana) {
+        this.diasSemana = diasSemana;
+    }
+
+    public Set<WorkoutExercise> getExercises() {
+        return exercises;
+    }
+
+    public void setExercises(Set<WorkoutExercise> exercises) {
+        this.exercises = exercises;
     }
 }

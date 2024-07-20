@@ -1,6 +1,7 @@
 package com.example.workit.controller;
 
 import com.example.workit.model.Workout;
+import com.example.workit.model.WorkoutExercise;
 import com.example.workit.service.WorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,11 @@ public class WorkoutController {
     @GetMapping("/{id}")
     public Workout getWorkoutById(@PathVariable Long id) {
         return workoutService.getWorkoutById(id);
+    }
+
+    @GetMapping("/{userId}/{day}")
+    public List<Workout> getWorkoutsByUserIdAndDay(@PathVariable Long userId, @PathVariable String day) {
+        return workoutService.getWorkoutsByUserIdAndDay(userId, day);
     }
 
     @PostMapping

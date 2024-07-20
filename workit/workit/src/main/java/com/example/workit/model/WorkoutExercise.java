@@ -1,5 +1,6 @@
 package com.example.workit.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,11 +11,20 @@ public class WorkoutExercise {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "workout_id")
+    @JoinColumn(name = "treino_id", nullable = false)
+    @JsonIgnore
     private Workout workout;
 
-    private String descricao;
+    @Column(name = "nome_exercicio", columnDefinition = "TEXT")
+    private String nomeExercicio;
 
+    @Column(name = "series", columnDefinition = "TEXT")
+    private String series;
+
+    @Column(name = "carga")
+    private Integer carga;
+
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -31,11 +41,27 @@ public class WorkoutExercise {
         this.workout = workout;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getNomeExercicio() {
+        return nomeExercicio;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setNomeExercicio(String nomeExercicio) {
+        this.nomeExercicio = nomeExercicio;
+    }
+
+    public String getSeries() {
+        return series;
+    }
+
+    public void setSeries(String series) {
+        this.series = series;
+    }
+
+    public Integer getCarga() {
+        return carga;
+    }
+
+    public void setCarga(Integer carga) {
+        this.carga = carga;
     }
 }
