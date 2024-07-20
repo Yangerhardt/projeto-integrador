@@ -46,7 +46,7 @@ $(document).ready(function() {
 
             setCookie('weeklyFrequency', weeklyFrequency, 7);
             setCookie('monthlyFrequency', monthlyFrequency, 30);
-            setCookie('frequencyDays', JSON.stringify(frequencyDays), 30); 
+            setCookie('frequencyDays', JSON.stringify(frequencyDays), 30);
 
             updateFrequency();
         }
