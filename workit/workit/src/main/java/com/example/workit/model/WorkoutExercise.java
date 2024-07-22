@@ -24,6 +24,8 @@ public class WorkoutExercise {
     @Column(name = "carga")
     private Integer carga;
 
+    public WorkoutExercise() {}
+
     public WorkoutExercise(Long treinoId, String nomeExercicio, String series, Integer carga) {
         this.workout = new Workout();
         this.workout.setId(treinoId);
